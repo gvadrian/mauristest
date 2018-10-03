@@ -1,5 +1,4 @@
 <?php
-// DIC configuration
 
 $container = $app->getContainer();
 
@@ -16,4 +15,8 @@ $container['logger'] = function ($c) {
     $logger->pushProcessor(new Monolog\Processor\UidProcessor());
     $logger->pushHandler(new Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
     return $logger;
+};
+
+$container['App\Controllers\UsersController'] = function ($c) {
+    return new App\Controllers\UsersController($c->get('em'));
 };
